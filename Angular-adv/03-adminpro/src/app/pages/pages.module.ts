@@ -1,12 +1,17 @@
+// Modulos de angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule} from '@angular/forms';
+
+// Mis modulos
+import {SharedModule} from '../shared/shared.module';
+import {AppRoutingModule} from '../app-routing.module';
+import {ComponentsModule} from '../components/components.module';
+
+// Componentes
 import {ProgressComponent} from './progress/progress.component';
 import {GraficalComponent} from './grafical/grafical.component';
 import {PagesComponent} from './pages.component';
-import {SharedModule} from '../shared/shared.module';
-import {AppRoutingModule} from '../app-routing.module';
-
-
 
 @NgModule({
   declarations: [
@@ -19,10 +24,12 @@ import {AppRoutingModule} from '../app-routing.module';
     GraficalComponent,
     PagesComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    AppRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        AppRoutingModule,
+        FormsModule,
+        ComponentsModule
+    ]
 })
 export class PagesModule { }

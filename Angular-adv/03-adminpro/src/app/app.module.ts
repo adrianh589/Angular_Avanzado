@@ -10,8 +10,6 @@ import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
