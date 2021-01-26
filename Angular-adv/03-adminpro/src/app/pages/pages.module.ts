@@ -12,17 +12,20 @@ import {ComponentsModule} from '../components/components.module';
 import {ProgressComponent} from './progress/progress.component';
 import {GraficalComponent} from './grafical/grafical.component';
 import {PagesComponent} from './pages.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
     ProgressComponent,
     GraficalComponent,
     PagesComponent,
+    AccountSettingsComponent,
   ],
   exports: [
     ProgressComponent,
     GraficalComponent,
     PagesComponent,
+    AccountSettingsComponent
   ],
     imports: [
         CommonModule,

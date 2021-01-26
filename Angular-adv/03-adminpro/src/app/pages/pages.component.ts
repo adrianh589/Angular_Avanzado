@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {SettingsService} from '../services/settings.service';
+
+//Decirle a angular que esta funcion existe porque esta de manera global
+declare function customInitFunctions(): void;
 
 @Component({
   selector: 'app-pages',
@@ -8,9 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
 
-  constructor() { }
+  constructor( private settigsService: SettingsService ) {
+
+  }
 
   ngOnInit(): void {
+    customInitFunctions();
   }
+
+
 
 }
