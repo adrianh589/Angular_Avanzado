@@ -32,7 +32,13 @@
 
           <ul aria-expanded="false" class="collapse">
             <li>
-              <a *ngFor="let subItem of item.submenu" [routerLink]="subItem.url">{{subItem.titulo}} </a>
+              <a *ngFor="let subItem of item.submenu"
+                 [routerLink]="subItem.url"
+                 routerLinkActive="active"
+                 [routerLinkActiveOptions]="{ exact: true }"
+              >
+                  {{subItem.titulo}}
+              </a>
             </li>
           </ul>
 

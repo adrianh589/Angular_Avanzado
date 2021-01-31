@@ -12,7 +12,7 @@ declare function customInitFunctions(): void;
 })
 export class PagesComponent implements OnInit {
 
-  constructor( private settigsService: SettingsService ) {
+  constructor( private settingsService: SettingsService ) {
 
   }
 
