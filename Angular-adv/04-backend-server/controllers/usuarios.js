@@ -5,12 +5,25 @@ const {generarJWT} = require ("../helpers/jwt");
 
 const getUsuarios = async (req, res) => {
 
-    const usuarios = await Usuario.find({}, 'nombre email role google');
+    const desde = Number(req.query.param) || 0;
+
+    /**
+     * Debido a que son dos promesas, el hacer el await para cada una de ellas hace ineficiente tener que esperar
+     * por ambas debido a que pueden tardar mas de lo normal, es por ello que se hace el uso de Promise.all()
+     * con la finalidad de ejecutar todas las promesas pero de manera simultanea en vez de esperar 1 por 1
+     */
+    const [ usuarios, total ] = await Promise.all([
+        Usuario.find({}, 'nombre email role google img')
+            .skip(desde)// Desde que numero queremos los usuarios
+            .limit(5),// limite desde el numero por ejemplo desde el 5 hasta el 10 de los usuarios
+        Usuario.countDocuments()// Total de registros
+    ]);
 
     res.json({
         ok: true,
         usuarios: usuarios,
-        uid: req.uid
+        uid: req.uid,
+        total
     });
 }
 
