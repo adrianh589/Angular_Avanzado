@@ -19,6 +19,9 @@ dbconnection();
 // Se instalo nodemon con la finalidad de que al realizar cambios este se refresque automaticamente
 // En el package.json se modifico el script para iniciar express
 
+//Directorio público
+app.use(express.static('public'));
+
 // Rutas
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/login', require('./routes/auth'));
