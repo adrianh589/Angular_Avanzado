@@ -32,10 +32,19 @@ router.post(
 
 router.put('/:id',
     [
+        validarJWT,
+        check('x-token', 'El token no es válido').isJWT(),
+        check('nombre', 'El nombre del médico es requerido').not().isEmpty(),
+        check('hospital', 'El id del hospital debe ser válido').isMongoId(),
+        validarCampos
     ],
-    actualizarMedico)
+    actualizarMedico
+)
 
-router.delete('/:id', borrarMedico);
+router.delete('/:id',
+    [validarJWT],
+    borrarMedico
+);
 
 module.exports = router;
 

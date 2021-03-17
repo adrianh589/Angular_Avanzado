@@ -1,5 +1,6 @@
 const {response} = require ('express');
 const Medico = require('../models/medico.js');
+const Hospital = require('../models/hospital.js');
 
 const crearMedico = async (req, res = response) => {
 
@@ -39,18 +40,77 @@ const leerMedico = async (req, res = response) => {
     });
 }
 
-const actualizarMedico = (req, res = response) => {
-    res.json ({
-        ok: true,
-        msg: 'actualizar medico'
-    });
+const actualizarMedico = async (req, res = response) => {
+
+    const idMedico = req.params.id;
+    const uid = req.uid;
+
+    try{
+
+        const medico = await Medico.findById(idMedico);
+
+        if(!medico){
+            return res.status(404).json ({
+                ok: false,
+                msg: 'No existe un medico o un hospital con ese id'
+            });
+        }
+
+        const medicoActualizado = {
+            ...req.body,
+            usuario: uid
+        }
+
+        const medicoRes= await Medico.findByIdAndUpdate(idMedico, medicoActualizado, {new: true});
+
+        res.json ({
+            ok: true,
+            medico: medicoRes
+        });
+
+    }catch (error){
+        console.log(error);
+        res.json ({
+            ok: false,
+            msg: 'Ha surgido un error en el servidor, hable con el administrador'
+        });
+    }
+
 }
 
-const borrarMedico = (req, res = response) => {
-    res.json ({
-        ok: true,
-        msg: 'borrar medico'
-    });
+const borrarMedico = async (req, res = response) => {
+
+    const {id} = req.params;
+
+    try{
+
+        const medico = await Medico.findById(id);
+        console.log (medico);
+
+        if(!medico){
+            res.status(404).json ({
+                ok: false,
+                msg: 'No existe el medico con ese id'
+            });
+        }
+
+        await Medico.findByIdAndDelete(id);
+
+        res.json ({
+            ok: true,
+            msg: `Medico ${medico.nombre} borrado exitosamente`
+        });
+
+    }catch (error) {
+
+        console.log (error);
+        res.status(500).json ({
+            ok: false,
+            msg: 'Surgio un problema en el servidor, hable con el administrador'
+        });
+
+    }
+
 }
 
 module.exports = {
