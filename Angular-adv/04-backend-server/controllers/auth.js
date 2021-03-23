@@ -14,7 +14,7 @@ const login = async (req, res = response) => {
 
         // Verificar email
         if (!usuarioDB){
-            return res.json({
+            return res.status(400).json({
                ok: false,
                msg: 'Email no válido'
             });
