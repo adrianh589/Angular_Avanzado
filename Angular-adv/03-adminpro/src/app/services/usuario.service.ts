@@ -6,6 +6,7 @@ import {AutenticacionForm} from '../interfaces/autenticacion-form.interface';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 /**
  * NOTA: Los servicios en angular son singleton es decir que se ejecutan/instancian una unica vez
@@ -20,6 +21,7 @@ declare const gapi: any;
 export class UsuarioService{
 
   public auth2: any;
+  public usuario!: Usuario;
 
   constructor( private http: HttpClient,
                private router: Router,
@@ -60,11 +62,14 @@ export class UsuarioService{
         "x-token": token
       }
     }).pipe( 
-      tap( (resp: any) => {
-        localStorage.setItem('token', resp.token)
+      map( (resp: any) => {
+
+        const {nombre, email, google, role, uid, img = ''} = resp.usuario;
+        this.usuario = new Usuario( nombre, email, '', img, google, role, uid );
+        localStorage.setItem('token', resp.token);
+        return true;
       }),
-      map( resp => true),
-      catchError(error => of(false))// of sirve para retornar un observable y de esa manera no romper el ciclo
+      catchError( error => of(false) )
     )
 
   }
