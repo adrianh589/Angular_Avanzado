@@ -29,6 +29,14 @@ export class UsuarioService{
     this.googleInit();
   }
 
+  get token(){
+    return localStorage.getItem('token') || '';
+  }
+
+  get uid(): string{
+    return this.usuario.uid || '';
+  }
+
   googleInit(){
     // A diferencia de los observables, las promesas siempre se ejecutan y los observables
     // tiene que alguien estar escuchando
@@ -45,7 +53,7 @@ export class UsuarioService{
 
   logouth(){
     localStorage.removeItem('token');
-    
+
     this.auth2.signOut().then( () => {
       this.ngZone.run(() =>{
         this.router.navigateByUrl('/login');
@@ -55,13 +63,12 @@ export class UsuarioService{
   }
 
   validarToken(): Observable<boolean>{
-    const token = localStorage.getItem('token') || '';
 
     return this.http.get(`${base_url}/login/renew`, {
       headers: {
-        "x-token": token
+        "x-token": this.token
       }
-    }).pipe( 
+    }).pipe(
       map( (resp: any) => {
 
         const {nombre, email, google, role, uid, img = ''} = resp.usuario;
@@ -78,15 +85,29 @@ export class UsuarioService{
     return this.http.post(`${base_url}/usuarios`, formData)
     .pipe( tap( (resp: any) => { // Tap sirve para disparar un efecto secundario
       localStorage.setItem('token', resp.token)
-    } 
+    }
      ));
+  }
+
+  actualizarPerfil( data: {email: string, nombre: string, role?: string} ){
+
+    data = {
+      ...data,
+      role: this.usuario.role
+    };
+
+    return this.http.put(`${base_url}/usuarios/${this.uid}`, data, {
+      headers: {
+        "x-token": this.token
+      }
+    })
   }
 
   autenticarUsuario( formData: AutenticacionForm){
     return this.http.post(`${base_url}/login`, formData)
     .pipe( tap( (resp: any) => { // Tap sirve para disparar un efecto secundario
       localStorage.setItem('token', resp.token)
-    } 
+    }
      ));
   }
 
@@ -94,7 +115,7 @@ export class UsuarioService{
     return this.http.post(`${base_url}/login/google`, { token })
     .pipe( tap( (resp: any) => { // Tap sirve para disparar un efecto secundario
       localStorage.setItem('token', resp.token)
-    } 
+    }
      ));
   }
 }
