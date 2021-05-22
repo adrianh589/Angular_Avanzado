@@ -15,5 +15,10 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  text-align: center;  
+  text-align: center;
+}
+
+.img-avatar{
+  height: 200px;
+  width: 200px;
 }

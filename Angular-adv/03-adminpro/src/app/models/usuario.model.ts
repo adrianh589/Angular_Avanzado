@@ -1,4 +1,5 @@
-import { environment } from "src/environments/environment";
+import { environment } from 'src/environments/environment';
+// tslint:disable-next-line:variable-name
 const baser_url = environment.base_url;
 
 export class Usuario {

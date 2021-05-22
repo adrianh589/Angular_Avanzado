@@ -56,7 +56,11 @@ const cargarArchivo = async (req, res = response) => {
         //Actualizar base de datos
         actualizarImagen (tipo, id, nombreArchivo);
 
-        respuestaJSON(res, true, 'Archivo subido correctamente', 200, nombreArchivo, res);
+        return res.status(200).json ({
+            ok: true,
+            msg: "Archivo subido",
+            nombreArchivo
+        });
     });
 }
 
