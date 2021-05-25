@@ -9,10 +9,11 @@ export class Usuario {
     public email: string,
     public password?: string,
     public img?: string,
-    public google?: boolean,
+    public google?: string | undefined,
     public role?: string,
     public uid?: string
-  ) { }
+  ) {
+  }
 
   imprimirUsuario() {
     console.log(this.nombre);
@@ -20,11 +21,11 @@ export class Usuario {
 
   get imagenUrl() {
 
-    if ( this.img?.includes('http') ) {
+    if (!this.img) {
+      return `${baser_url}/uploads/usuarios/no-image`;
+    } else if (this.img?.includes('http')) {
       return this.img;
-    }
-
-    if (this.img) {
+    } else if (this.img) {
       return `${baser_url}/uploads/usuarios/${this.img}`;
     } else {
       return `${baser_url}/uploads/usuarios/no-image`;

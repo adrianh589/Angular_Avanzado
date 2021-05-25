@@ -5,7 +5,6 @@ import { UsuarioService } from '../../services/usuario.service';
 import { FileuploadService } from '../../services/fileupload.service';
 
 import { Usuario } from '../../models/usuario.model';
-import { logger } from 'codelyzer/util/logger';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,7 +28,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.perfilForm = this.fb.group({
       nombre: [this.usuario.nombre, Validators.required],
-      email: [this.usuario.email, [Validators.required, Validators.email]],
+      email: [this.usuario.email, [Validators.required, Validators.required]],
     });
   }
 
