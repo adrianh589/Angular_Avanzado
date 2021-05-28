@@ -10,11 +10,12 @@ const { validarCampos } = require('../middlewares/validar-campos');
 const { actualizarMedico,
     borrarMedico,
     crearMedico,
-    leerMedico } = require('../controllers/medicos');
+    leerMedico,
+    getMedicoById } = require('../controllers/medicos');
 
 const router = Router();
 
-router.get('/', leerMedico);
+router.get('/', validarJWT, leerMedico);
 
 // El segundo argumento son middlewares los cuales son funciones que se ejecutan antes de otras
 // Si son varios usamos [] en caso contrario los omitimos
@@ -44,6 +45,11 @@ router.put('/:id',
 router.delete('/:id',
     [validarJWT],
     borrarMedico
+);
+
+router.get('/:id',
+    [validarJWT],
+    getMedicoById
 );
 
 module.exports = router;
