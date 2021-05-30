@@ -20,13 +20,15 @@ export class AuthGuard implements CanActivate {
 
       return this.usuarioService.validarToken().pipe(
         tap( estaAutenticado =>  {
-          if(!estaAutenticado){
+          if (!estaAutenticado){
             this.router.navigateByUrl('/login');
           }
         })
       );
-      
-    // return true; // Este true indica que se puede pasar por la ruta en donde se encuentre el guard, si es false entonces bloqueara la ruta
+
+    // return true;
+    // Este true indica que se puede pasar por la ruta en donde se encuentre el guard,
+    // si es false entonces bloqueara la ruta
   }
-  
+
 }

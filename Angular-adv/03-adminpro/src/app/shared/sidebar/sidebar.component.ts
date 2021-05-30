@@ -14,13 +14,13 @@ export class SidebarComponent implements OnInit {
   menuItems: any[] | undefined;
   public usuario?: Usuario;
 
-  constructor( private sidebarService: SidebarService,
+  constructor( public sidebarService: SidebarService,
                private usuarioService: UsuarioService ) {
-    this.menuItems = sidebarService.menu;
     this.usuario = this.usuarioService.usuario;
   }
 
   ngOnInit(): void {
+    console.log(this.sidebarService.menu);
   }
 
 

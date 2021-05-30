@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
     private fb: FormBuilder,
+              // tslint:disable-next-line:variable-name
     private _usuarioService: UsuarioService,
     private ngZone: NgZone) { }
 
@@ -36,10 +37,6 @@ export class LoginComponent implements OnInit {
     this.renderButton();
   }
 
-  /**
-   * 
-   * @returns 
-   */
   login() {
 
     if (this.loginForm.valid) {
@@ -51,7 +48,7 @@ export class LoginComponent implements OnInit {
           console.log(res);
           this.remember(this.loginForm.value);
           // Mover al dashboard
-          this.router.navigateByUrl('/')
+          this.router.navigateByUrl('/');
         }, (err) => {
           // Sweet alert de error
           this.sweetAlert('error', 'Error', err.error.msg);
@@ -75,7 +72,7 @@ export class LoginComponent implements OnInit {
       icon: icon,
       title: title,
       text: text
-    })
+    });
   }
 
   /**
@@ -90,9 +87,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  /**
-   * 
-   */
   renderButton() {
     gapi.signin2.render('my-signin2', {
       'scope': 'profile email',
@@ -105,7 +99,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    */
   async startApp() {
     await this._usuarioService.googleInit();
@@ -114,8 +108,8 @@ export class LoginComponent implements OnInit {
   };
 
   /**
-   * 
-   * @param element 
+   *
+   * @param element
    */
   attachSignin(element: any) {
     this.auth2.attachClickHandler(element, {},
