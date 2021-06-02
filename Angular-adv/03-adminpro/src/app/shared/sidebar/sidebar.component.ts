@@ -11,7 +11,6 @@ import {SidebarService} from '../../services/sidebar.service';
 })
 export class SidebarComponent implements OnInit {
 
-  menuItems: any[] | undefined;
   public usuario?: Usuario;
 
   constructor( public sidebarService: SidebarService,
@@ -20,7 +19,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.sidebarService.menu);
+
   }
 
 
