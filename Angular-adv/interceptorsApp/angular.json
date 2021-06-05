@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "adminpro": {
+    "interceptorsApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/adminpro",
+            "outputPath": "dist/interceptorsApp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,9 +30,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              "src/assets/js/custom.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -67,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "adminpro:build"
+            "browserTarget": "interceptorsApp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "adminpro:build:production"
+              "browserTarget": "interceptorsApp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "adminpro:build"
+            "browserTarget": "interceptorsApp:build"
           }
         },
         "test": {
@@ -115,16 +113,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "adminpro:serve"
+            "devServerTarget": "interceptorsApp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "adminpro:serve:production"
+              "devServerTarget": "interceptorsApp:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "adminpro"
+  "defaultProject": "interceptorsApp"
 }
